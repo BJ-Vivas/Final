@@ -363,6 +363,7 @@ public class Calculator extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+   
 
     private void NumberActionPerformed(String number) {
         Results.setText(Results.getText() + number);
@@ -384,9 +385,9 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_DotActionPerformed
 
     private void EqualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EqualsActionPerformed
+              
         NumEnter2 = Double.parseDouble(Results.getText());
-
-        switch (op) {
+              switch (op) {
         case "+":
             Result = NumEnter1 + NumEnter2;
             break;
@@ -402,14 +403,30 @@ public class Calculator extends javax.swing.JFrame {
             } else {
                 Results.setText("Error: Division by zero");
                 return;
-            } 
+            }
             break;
-        default:
-            Results.setText("Error: Invalid operation");
-            return;
+              }    
+              
+     if (op.equals("sin")) {
+        double angle = Double.parseDouble(Results.getText().substring(4));
+        double sinValue = isRadians ? Math.sin(Math.toRadians(angle)) : Math.sin(angle);
+        Results.setText(""+sinValue);
+        
+     } else if (op.equals("cos")) {
+        double angle = Double.parseDouble(Results.getText().substring(4));
+        double cosValue = isRadians ? Math.cos(Math.toRadians(angle)) : Math.cos(angle);
+        Results.setText(""+cosValue);
+        
+     } else if(op.equals("tan")) {
+        double angle = Double.parseDouble(Results.getText().substring(4));
+        double tanValue = isRadians ? Math.tan(Math.toRadians(angle)) : Math.tan(angle);
+        Results.setText(""+tanValue);
     }//GEN-LAST:event_EqualsActionPerformed
          Results.setText(Double.toString(Result));
-    }
+       }
+      
+    
+    
     private void MinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusActionPerformed
         NumEnter1 = Double.parseDouble(Results.getText());
         Results.setText("");
@@ -449,8 +466,8 @@ public class Calculator extends javax.swing.JFrame {
     private void MultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultiplyActionPerformed
 
        NumEnter1 = Double.parseDouble(Results.getText());
-        Results.setText("");
-        op = "*";
+       Results.setText("");
+       op = "*";
 
     }//GEN-LAST:event_MultiplyActionPerformed
 
@@ -487,8 +504,9 @@ public class Calculator extends javax.swing.JFrame {
     
     private boolean isRadians = true;
     private void radDegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radDegActionPerformed
-       isRadians = !isRadians;
-       radDeg.setText(isRadians ? "Rad" : "Deg");
+         isRadians = !isRadians;
+        radDeg.setText(isRadians ? "Rad" : "Deg");
+        Results.setText("");
      
     }//GEN-LAST:event_radDegActionPerformed
 
@@ -497,39 +515,27 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearActionPerformed
 
     private void ResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResultsActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_ResultsActionPerformed
 
     private void sinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinActionPerformed
-        double angle = Double.parseDouble(Results.getText()); 
-    if (!isRadians) {
-        angle = Math.toRadians(angle);
-    }
-    double sin = Math.sin(angle);
-    Results.setText(Double.toString(sin));
+        Results.setText("sin(");
+        op = "sin";
     }//GEN-LAST:event_sinActionPerformed
 
     private void cosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cosActionPerformed
-        double angle = Double.parseDouble(Results.getText());
-        if (!isRadians) {
-        angle = Math.toRadians(angle);
-    }
-        double cos = Math.cos(angle);
-        Results.setText(Double.toString(cos));
+        Results.setText("cos(");
+        op = "cos";
     }//GEN-LAST:event_cosActionPerformed
 
     private void squarootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squarootActionPerformed
-        double  sqrt = Math.sqrt(Double.parseDouble(Results.getText()));
-        Results.setText(Double.toString(sqrt));
+        double sqrt = Math.sqrt(Double.parseDouble(Results.getText()));
+        Results.setText("√(" + Results.getText() + ") = " + sqrt);
     }//GEN-LAST:event_squarootActionPerformed
 
     private void tanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanActionPerformed
-         double angle = Double.parseDouble(Results.getText());
-    if (!isRadians) {
-        angle = Math.toRadians(angle);
-    }
-    double tan = Math.tan(angle);
-    Results.setText(Double.toString(tan));   
+        Results.setText("tan(");
+        op = "tan";
     }//GEN-LAST:event_tanActionPerformed
 
     /**
