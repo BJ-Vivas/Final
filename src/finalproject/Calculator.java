@@ -385,9 +385,8 @@ public class Calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_DotActionPerformed
 
     private void EqualsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EqualsActionPerformed
-              
-        NumEnter2 = Double.parseDouble(Results.getText());
-              switch (op) {
+            NumEnter2 = Double.parseDouble(Results.getText().replaceAll("[^0-9.-]", ""));
+    switch (op) {
         case "+":
             Result = NumEnter1 + NumEnter2;
             break;
@@ -405,28 +404,25 @@ public class Calculator extends javax.swing.JFrame {
                 return;
             }
             break;
-              }    
-              
-     if (op.equals("sin")) {
-        double angle = Double.parseDouble(Results.getText().substring(4));
-        double sinValue = isRadians ? Math.sin(Math.toRadians(angle)) : Math.sin(angle);
-        Results.setText(""+sinValue);
-        
-     } else if (op.equals("cos")) {
-        double angle = Double.parseDouble(Results.getText().substring(4));
-        double cosValue = isRadians ? Math.cos(Math.toRadians(angle)) : Math.cos(angle);
-        Results.setText(""+cosValue);
-        
-     } else if(op.equals("tan")) {
-        double angle = Double.parseDouble(Results.getText().substring(4));
-        double tanValue = isRadians ? Math.tan(Math.toRadians(angle)) : Math.tan(angle);
-        Results.setText(""+tanValue);
+        case "sin":
+            double angleSin = NumEnter2;
+            double sinValue = isRadians ? Math.sin(Math.toRadians(angleSin)) : Math.sin(angleSin);
+            Results.setText("" + sinValue);
+            return;
+        case "cos":
+            double angleCos = NumEnter2;
+            double cosValue = isRadians ? Math.cos(Math.toRadians(angleCos)) : Math.cos(angleCos);
+            Results.setText("" + cosValue);
+            return;
+        case "tan":
+            double angleTan = NumEnter2;
+            double tanValue = isRadians ? Math.tan(Math.toRadians(angleTan)) : Math.tan(angleTan);
+            Results.setText("" + tanValue);
+            return;
+        }
+        Results.setText(Double.toString(Result)); 
     }//GEN-LAST:event_EqualsActionPerformed
-         Results.setText(Double.toString(Result));
-       }
-      
-    
-    
+ 
     private void MinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusActionPerformed
         NumEnter1 = Double.parseDouble(Results.getText());
         Results.setText("");
